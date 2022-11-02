@@ -9,7 +9,7 @@ const {
 
 const {OPEN_ID} = require("../constants.json")
 
-export class GitHubRole extends Construct {
+export class GithubRoleConstruct extends Construct {
     constructor(scope: Construct, name: string) {
         super(scope, name);
 

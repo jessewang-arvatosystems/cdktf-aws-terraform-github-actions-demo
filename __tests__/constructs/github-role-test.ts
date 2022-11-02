@@ -1,6 +1,6 @@
 import "cdktf/lib/testing/adapters/jest";
 import {Testing} from "cdktf";
-import {GitHubRole} from "../../constructs/git-hub-role";
+import {GithubRoleConstruct} from "../../constructs/github-role-construct";
 import {IamRole} from "@cdktf/provider-aws/lib/iam-role";
 import {IamOpenidConnectProvider} from "@cdktf/provider-aws/lib/iam-openid-connect-provider";
 
@@ -15,7 +15,7 @@ describe("GitHub Role", () => {
     beforeAll(() => {
         expectObj = expect(
             Testing.synthScope((scope) => {
-                new GitHubRole(scope, "github-construct-test");
+                new GithubRoleConstruct(scope, "github-construct-test");
             })
         );
     });

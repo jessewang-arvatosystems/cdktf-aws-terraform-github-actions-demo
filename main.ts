@@ -4,6 +4,7 @@ import {Construct} from "constructs";
 import {App, TerraformStack} from "cdktf";
 import {AwsProvider} from "@cdktf/provider-aws/lib/provider";
 import {S3Construct} from "./constructs/s3";
+import {GithubRoleConstruct} from "./constructs/github-role-construct";
 
 const {
   region
@@ -16,6 +17,8 @@ export class CoreStack extends TerraformStack {
     new AwsProvider(this, "AWS", {region});
 
     new S3Construct(this, "s3")
+
+    new GithubRoleConstruct(this, "github-role")
   }
 }
 
