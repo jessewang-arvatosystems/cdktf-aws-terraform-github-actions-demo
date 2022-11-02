@@ -4,7 +4,7 @@ import {IamRole} from "@cdktf/provider-aws/lib/iam-role";
 import {TerraformOutput} from "cdktf";
 
 const {
-    githubRoleName
+    githubRole
 } = require("../variables.json");
 
 const {OPEN_ID} = require("../constants.json")
@@ -22,7 +22,7 @@ export class GithubRoleConstruct extends Construct {
         const rolePolicy = createRolePolicy(openIdConnectProvider.arn)
 
         const iamRole = new IamRole(this, "github-oidc-role", {
-            name: githubRoleName,
+            name: githubRole.name,
             assumeRolePolicy: JSON.stringify(rolePolicy)
         })
 

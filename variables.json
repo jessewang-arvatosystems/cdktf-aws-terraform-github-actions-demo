@@ -4,6 +4,8 @@
     "bucket": "cdktf-bucket-name",
     "terraformFolder": "terraform_backend/"
   },
-  "githubRoleName": "github-oidc-role",
+  "githubRole": {
+    "name": "github-oidc-role"
+  },
   "region": "us-east-1"
 }
