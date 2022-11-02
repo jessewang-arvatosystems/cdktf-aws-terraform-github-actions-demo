@@ -18,7 +18,7 @@ describe("S3 Bucket", () => {
     beforeAll(() => {
         expectObj = expect(
             Testing.synthScope((scope) => {
-                new S3Construct(scope, "my-app");
+                new S3Construct(scope, "s3-construct-test");
             })
         );
     });
