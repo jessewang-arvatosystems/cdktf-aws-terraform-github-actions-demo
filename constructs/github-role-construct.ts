@@ -10,6 +10,9 @@ const {
 const {OPEN_ID} = require("../constants.json")
 
 export class GithubRoleConstruct extends Construct {
+
+    iamRole: IamRole
+
     constructor(scope: Construct, name: string) {
         super(scope, name);
 
@@ -21,13 +24,13 @@ export class GithubRoleConstruct extends Construct {
 
         const rolePolicy = createRolePolicy(openIdConnectProvider.arn)
 
-        const iamRole = new IamRole(this, "github-oidc-role", {
+        this.iamRole = new IamRole(this, "github-oidc-role", {
             name: githubRole.name,
             assumeRolePolicy: JSON.stringify(rolePolicy)
         })
 
         new TerraformOutput(this, 'github-oidc-role-arn-output', {
-            value: iamRole.arn
+            value: this.iamRole.arn
         });
 
         function createRolePolicy(arn: string) {
@@ -36,16 +39,15 @@ export class GithubRoleConstruct extends Construct {
                 "Statement": [
                 {
                     "Action": "sts:AssumeRoleWithWebIdentity",
-                    "Principal" : {
-                        "Federated" : arn
+                    "Principal": {
+                        "Federated": arn
                     },
-                    "Condition" : {
-                        "StringLike" : {
+                    "Condition": {
+                        "StringLike": {
                             "token.actions.githubusercontent.com:sub" : `repo:${OPEN_ID.REPO_NAME}:*`
                         }
                     },
-                    "Effect": "Allow",
-                    "Sid": ""
+                    "Effect": "Allow"
                 }]
             }
         }

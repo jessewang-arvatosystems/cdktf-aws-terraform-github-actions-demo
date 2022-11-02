@@ -52,21 +52,27 @@ export class S3Construct extends Construct {
                 "Version": "2012-10-17",
                 "Statement": [
                     {
-                        "Action": ["logs:*"],
-                        "Resources": ["*"],
-                        "Effect": "Allow",
-                        "Sid": ""
-                    },
-                    {
-                        "Action": ["s3:*"],
-                        "Resources": [
-                            `${arn}/*`,
+                        "Action": [
+                            "s3:ListBucket"
+                        ],
+                        "Resource": [
                             arn
                         ],
-                        "Effect": "Allow",
-                        "Sid": ""
-                    }]
-            }
+                        "Effect": "Allow"
+                    },
+                    {
+                        "Action": [
+                            "s3:GetObject",
+                            "s3:PutObject",
+                            "s3:DeleteObject",
+                        ],
+                        "Resource": [
+                            `${arn}/*`
+                        ],
+                        "Effect": "Allow"
+                    }
+                ]
+            };
         }
     }
 
