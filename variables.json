@@ -1,6 +1,7 @@
 {
   "acl": "private",
-  "bucket": "example-bucket-name",
+  "bucket": "cdktf-bucket-name",
+  "githubRoleName": "github-oidc-role",
   "region": "us-east-1",
-  "terraform_folder": "terraform_backend/"
+  "terraformFolder": "terraform_backend/"
 }

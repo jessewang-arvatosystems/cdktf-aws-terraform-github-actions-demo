@@ -1,0 +1,8 @@
+{
+  "OPEN_ID": {
+    "TOKEN_GITHUB_URL": "https://token.actions.githubusercontent.com",
+    "CLIENT_ID": "sts.amazonaws.com",
+    "THUMBPRINT": "6938fd4d98bab03faadb97b34396831e3780aea1",
+    "REPO_NAME": "jessewang-arvatosystems/trigger-terraform-aws-ci-cd"
+  }
+}

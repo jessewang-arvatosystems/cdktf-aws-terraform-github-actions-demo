@@ -7,7 +7,7 @@ import {S3Object} from "@cdktf/provider-aws/lib/s3-object";
 const {
     acl,
     bucket,
-    terraform_folder
+    terraformFolder
 } = require("../variables.json");
 
 export class S3Construct extends Construct {
@@ -30,7 +30,7 @@ export class S3Construct extends Construct {
 
         new S3Object(this, "terraform_folder", {
             bucket: s3Bucket.id,
-            key: terraform_folder
+            key: terraformFolder
         })
     }
 }

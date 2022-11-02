@@ -9,7 +9,7 @@ import {S3Object} from "@cdktf/provider-aws/lib/s3-object";
 const {
     acl,
     bucket,
-    terraform_folder
+    terraformFolder
 } = require("../../variables.json");
 
 describe("S3 Bucket", () => {
@@ -41,7 +41,7 @@ describe("S3 Bucket", () => {
 
     it("terraform sub folder exists", () => {
         expectObj.toHaveResourceWithProperties(S3Object, {
-            key: terraform_folder
+            key: terraformFolder
         });
     });
 
