@@ -2,6 +2,7 @@
   "s3": {
     "acl": "private",
     "bucket": "cdktf-bucket-name",
+    "policyName": "cdktf-s3-policy",
     "terraformFolder": "terraform_backend/"
   },
   "githubRole": {

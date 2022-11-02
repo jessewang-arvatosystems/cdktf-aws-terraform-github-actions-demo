@@ -5,11 +5,13 @@ import {S3Bucket} from "@cdktf/provider-aws/lib/s3-bucket";
 import {S3BucketAcl} from "@cdktf/provider-aws/lib/s3-bucket-acl";
 import {S3BucketVersioningA} from "@cdktf/provider-aws/lib/s3-bucket-versioning";
 import {S3Object} from "@cdktf/provider-aws/lib/s3-object";
+import {IamPolicy} from "@cdktf/provider-aws/lib/iam-policy";
 
 const {
     s3: {
         acl,
         bucket,
+        policyName,
         terraformFolder
     }
 } = require("../../variables.json");
@@ -44,6 +46,13 @@ describe("S3 Bucket", () => {
     it("terraform sub folder exists", () => {
         expectObj.toHaveResourceWithProperties(S3Object, {
             key: terraformFolder
+        });
+    });
+
+    it("IAM policy exists", () => {
+        expectObj.toHaveResourceWithProperties(IamPolicy, {
+            name: policyName,
+            path: "/"
         });
     });
 
