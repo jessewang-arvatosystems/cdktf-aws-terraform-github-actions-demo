@@ -7,9 +7,11 @@ import {S3BucketVersioningA} from "@cdktf/provider-aws/lib/s3-bucket-versioning"
 import {S3Object} from "@cdktf/provider-aws/lib/s3-object";
 
 const {
-    acl,
-    bucket,
-    terraformFolder
+    s3: {
+        acl,
+        bucket,
+        terraformFolder
+    }
 } = require("../../variables.json");
 
 describe("S3 Bucket", () => {
