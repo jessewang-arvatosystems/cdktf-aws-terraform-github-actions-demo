@@ -1,0 +1,6 @@
+{
+  "acl": "private",
+  "bucket": "example-bucket-name",
+  "region": "us-east-1",
+  "terraform_folder": "terraform_backend/"
+}
