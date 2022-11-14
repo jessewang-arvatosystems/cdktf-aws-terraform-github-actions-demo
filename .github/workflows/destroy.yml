@@ -21,11 +21,13 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Navigate to main folder
-        id: cd-main
         run: cd main
 
-      - name: Run npm install
-        id: npm-install
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
         run: npm install
 
       - name: CDKTF Deploy
