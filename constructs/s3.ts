@@ -15,33 +15,36 @@ const {
 
 export class S3Construct extends Construct {
 
-    s3IamPolicy: IamPolicy
+    iamPolicy: IamPolicy
+    s3BucketAcl: S3BucketAcl
+    s3BucketVersioningA: S3BucketVersioningA
+    s3Object: S3Object
 
     constructor(scope: Construct, name: string) {
         super(scope, name);
 
         const s3Bucket = new S3Bucket(this, "bucket-backend", {bucket})
 
-        new S3BucketAcl(this, "bucket-backend-acl", {
+        this.s3BucketAcl = new S3BucketAcl(this, "bucket-backend-acl", {
             bucket: s3Bucket.id,
             acl
         })
 
-        new S3BucketVersioningA(this, "bucket-backend-versioning", {
+        this.s3BucketVersioningA = new S3BucketVersioningA(this, "bucket-backend-versioning", {
             bucket: s3Bucket.id,
             versioningConfiguration: {
                 status: "Enabled"
             }
         })
 
-        new S3Object(this, "terraform-folder", {
+        this.s3Object = new S3Object(this, "terraform-folder", {
             bucket: s3Bucket.id,
             key: terraformFolder
         })
 
         const s3BucketPolicy = createS3BucketPolicy(s3Bucket.arn)
 
-        this.s3IamPolicy = new IamPolicy(this, "bucket-policy", {
+        this.iamPolicy = new IamPolicy(this, "bucket-policy", {
             name: policyName,
             path: "/",
             policy: JSON.stringify(s3BucketPolicy)

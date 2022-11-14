@@ -12,17 +12,18 @@ const {OPEN_ID} = require("../constants.json")
 export class GithubRoleConstruct extends Construct {
 
     iamRole: IamRole
+    iamOpenidConnectProvider : IamOpenidConnectProvider
 
     constructor(scope: Construct, name: string) {
         super(scope, name);
 
-        const openIdConnectProvider = new IamOpenidConnectProvider(this, "github-oidc", {
+        this.iamOpenidConnectProvider = new IamOpenidConnectProvider(this, "github-oidc", {
             url: OPEN_ID.TOKEN_GITHUB_URL,
             clientIdList: [OPEN_ID.CLIENT_ID],
             thumbprintList: [OPEN_ID.THUMBPRINT]
         });
 
-        const rolePolicy = createRolePolicy(openIdConnectProvider.arn)
+        const rolePolicy = createRolePolicy(this.iamOpenidConnectProvider.arn)
 
         this.iamRole = new IamRole(this, "github-oidc-role", {
             name: githubRole.name,

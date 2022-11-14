@@ -1,6 +1,6 @@
 import "cdktf/lib/testing/adapters/jest";
 import {Testing} from "cdktf";
-import {GithubRoleConstruct} from "../../constructs/github-role-construct";
+import {GithubRoleConstruct} from "../../constructs/github-role";
 import {IamRole} from "@cdktf/provider-aws/lib/iam-role";
 import {IamOpenidConnectProvider} from "@cdktf/provider-aws/lib/iam-openid-connect-provider";
 

@@ -4,7 +4,7 @@ import {Construct} from "constructs";
 import {App, TerraformStack} from "cdktf";
 import {AwsProvider} from "@cdktf/provider-aws/lib/provider";
 import {S3Construct} from "./constructs/s3";
-import {GithubRoleConstruct} from "./constructs/github-role-construct";
+import {GithubRoleConstruct} from "./constructs/github-role";
 import {IamRolePolicyAttachment} from "@cdktf/provider-aws/lib/iam-role-policy-attachment";
 
 const {
@@ -21,8 +21,9 @@ export class CoreStack extends TerraformStack {
 
     const githubRoleConstruct = new GithubRoleConstruct(this, "github-role")
 
+    // Enable Github Role to access to S3 Bucket
     new IamRolePolicyAttachment(this, "attach-policy", {
-      policyArn: s3Construct.s3IamPolicy.arn,
+      policyArn: s3Construct.iamPolicy.arn,
       role: githubRoleConstruct.iamRole.name
     });
   }
