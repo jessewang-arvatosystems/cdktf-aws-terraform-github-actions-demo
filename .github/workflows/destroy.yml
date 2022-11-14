@@ -20,22 +20,24 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Navigate to main folder
-        run: cd main
-
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd main
+          npm install
+          npm install --global cdktf-cli@latest
 
       - name: CDKTF Deploy
         id: destroy
-        run: cdktf destroy --auto-approve
+        run: |
+          cd main
+          cdktf destroy --auto-approve
 
       - name: CDKTF Destroy Status
-        if: steps.deploy.outcome == 'failure'
+        if: steps.destroy.outcome == 'failure'
         run: exit 1
 
       - run: |
