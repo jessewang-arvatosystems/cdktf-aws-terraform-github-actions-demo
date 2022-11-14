@@ -30,6 +30,7 @@ jobs:
         run: | 
           cd main
           npm install
+          npm install --global cdktf-cli@latest
 
       - name: CDKTF Plan
         id: plan
