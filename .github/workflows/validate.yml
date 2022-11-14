@@ -32,21 +32,14 @@ jobs:
           npm install
           npm install --global cdktf-cli@latest
 
-      - name: CDKTF synth
-        id: synth
-        run: |
-          cd main
-          cdktf synth
-
-      - name: Terraform Init
-        run: |
-          cd main/cdktf.out
-          terraform init
-
       - name: Terraform Plan
         id: plan
         run: |
-          cd main/cdktf.out
+          cd main
+          cdktf synth
+          cd cdktf.out
+          terraform init
+          terraform plan
           echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
           terraform plan -no-color >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
@@ -68,7 +61,7 @@ jobs:
             **Pull Request by: @${{ github.actor }}**
 
       - name: CDKTF Plan Status
-        if: steps.synth.outcome == 'failure' || steps.plan.outcome == 'failure'
+        if: steps.plan.outcome == 'failure'
         run: exit 1
 
       - run: |
