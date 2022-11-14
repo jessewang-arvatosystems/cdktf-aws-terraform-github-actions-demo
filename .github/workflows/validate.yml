@@ -32,35 +32,35 @@ jobs:
           npm install
           npm install --global cdktf-cli@latest
 
-      #      - name: CDKTF Plan
-      #        id: plan
-      #        run: |
-      #          cd main
-      #          echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
-      #          cdktf plan >> $GITHUB_ENV
-      #          echo 'EOF' >> $GITHUB_ENV
-
       - name: CDKTF Plan
         id: plan
         run: |
           cd main
-          cdktf plan
+          echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
+          cdktf plan >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
 
-      #      - name: Create comment
-      #        uses: peter-evans/create-or-update-comment@v2
-      #        with:
-      #          issue-number: ${{ github.event.pull_request.number }}
-      #          body: |
-      #            #### Terraform Plan 📖`${{ steps.plan.outcome }}`
-      #
-      #            <details><summary>Show Plan</summary>
-      #
-      #            ```${{ env.PLAN_OUTPUT }}
-      #            ```
-      #
-      #            </details>
-      #
-      #            **Pull Request by: @${{ github.actor }}**
+#      - name: CDKTF Plan
+#        id: plan
+#        run: |
+#          cd main
+#          cdktf plan
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            #### Terraform Plan 📖`${{ steps.plan.outcome }}`
+
+            <details><summary>Show Plan</summary>
+
+            ```${{ env.PLAN_OUTPUT }}
+            ```
+
+            </details>
+
+            **Pull Request by: @${{ github.actor }}**
 
       - name: CDKTF Plan Status
         if: steps.plan.outcome == 'failure'
