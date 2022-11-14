@@ -6,7 +6,7 @@ on:
 
 jobs:
   setup-necessary-libraries:
-    uses: jessewang/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
+    uses: jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
 
   terraform:
     name: "Validate Terraform"
