@@ -5,11 +5,6 @@ on:
       - main
 
 jobs:
-  setup-necessary-libraries:
-    name: Setup Necessary Libraries
-    uses: jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
-    secrets: inherit
-
   terraform:
     name: "Validate Terraform"
     runs-on: ubuntu-latest
@@ -18,56 +13,54 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-#      - name: Setup necessary libraries
-#      -
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ secrets.AWS_GITHUB_OIDC_ROLE }}
 
-#      - name: Configure AWS credentials
-#        uses: aws-actions/configure-aws-credentials@v1
-#        with:
-#          aws-region: us-east-1
-#          role-to-assume: ${{ secrets.AWS_GITHUB_OIDC_ROLE }}
-#
-#      - name: Checkout
-#        uses: actions/checkout@v3
-#
-#      - uses: actions/setup-node@v3
-#        with:
-#          node-version: '14'
-#
-#      - name: Install dependencies
-#        run: |
-#          cd main
-#          npm install
-#          npm install --global cdktf-cli@latest
+      - name: Checkout
+        uses: actions/checkout@v3
 
-#      - name: CDKTF Plan
-#        id: plan
-#        run: |
-#          cd main
-#          echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
-#          cdktf plan >> $GITHUB_ENV
-#          echo 'EOF' >> $GITHUB_ENV
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: |
+          cd main
+          npm install
+          npm install --global cdktf-cli@latest
+
+      #      - name: CDKTF Plan
+      #        id: plan
+      #        run: |
+      #          cd main
+      #          echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
+      #          cdktf plan >> $GITHUB_ENV
+      #          echo 'EOF' >> $GITHUB_ENV
+
       - name: CDKTF Plan
         id: plan
         run: |
           cd main
           cdktf plan
 
-#      - name: Create comment
-#        uses: peter-evans/create-or-update-comment@v2
-#        with:
-#          issue-number: ${{ github.event.pull_request.number }}
-#          body: |
-#            #### Terraform Plan 📖`${{ steps.plan.outcome }}`
-#
-#            <details><summary>Show Plan</summary>
-#
-#            ```${{ env.PLAN_OUTPUT }}
-#            ```
-#
-#            </details>
-#
-#            **Pull Request by: @${{ github.actor }}**
+      #      - name: Create comment
+      #        uses: peter-evans/create-or-update-comment@v2
+      #        with:
+      #          issue-number: ${{ github.event.pull_request.number }}
+      #          body: |
+      #            #### Terraform Plan 📖`${{ steps.plan.outcome }}`
+      #
+      #            <details><summary>Show Plan</summary>
+      #
+      #            ```${{ env.PLAN_OUTPUT }}
+      #            ```
+      #
+      #            </details>
+      #
+      #            **Pull Request by: @${{ github.actor }}**
 
       - name: CDKTF Plan Status
         if: steps.plan.outcome == 'failure'
