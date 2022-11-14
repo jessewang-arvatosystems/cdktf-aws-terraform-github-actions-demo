@@ -11,7 +11,7 @@ const {
   region
 } = require("./variables.json");
 
-export class CoreStack extends TerraformStack {
+export class CI_CD_PipelineStack extends TerraformStack {
   constructor(scope: Construct, id: string) {
     super(scope, id);
 
@@ -30,5 +30,5 @@ export class CoreStack extends TerraformStack {
 }
 
 const app = new App();
-new CoreStack(app, "cdktf-terraform-github-actions-demo");
+new CI_CD_PipelineStack(app, "ci-cd-pipeline");
 app.synth();

@@ -2,14 +2,14 @@
 // SPDX-License-Identifier: MPL-2.0
 import "cdktf/lib/testing/adapters/jest";
 import {Testing} from "cdktf";
-import {CoreStack} from "../main";
+import {CI_CD_PipelineStack} from "../main";
 
 describe("Verifying terraform configuration", () => {
 
   let expectObj : jest.JestMatchers<String>;
   beforeAll(() => {
     const app = Testing.app();
-    const stack = new CoreStack(app, "core-stack-test");
+    const stack = new CI_CD_PipelineStack(app, "core-stack-test");
 
     expectObj = expect(Testing.fullSynth(stack))
   });
