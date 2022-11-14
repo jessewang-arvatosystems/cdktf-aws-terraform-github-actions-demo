@@ -6,7 +6,9 @@ on:
 
 jobs:
   setup-necessary-libraries:
+    name: Setup Necessary Libraries
     uses: jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
+    secrets: inherit
 
   terraform:
     name: "Validate Terraform"
