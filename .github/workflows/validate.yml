@@ -41,6 +41,7 @@ jobs:
       - name: Terraform Init
         run: |
           cd main/cdktf.out
+          terraform init
 
       - name: Terraform Plan
         id: plan
