@@ -33,6 +33,7 @@ jobs:
           npm install --global cdktf-cli@latest
 
       - name: CDKTF synth
+        id: synth
         run: |
           cd main
           cdktf synth
@@ -66,7 +67,7 @@ jobs:
             **Pull Request by: @${{ github.actor }}**
 
       - name: CDKTF Plan Status
-        if: steps.plan.outcome == 'failure'
+        if: steps.synth.outcome == 'failure' || steps.plan.outcome == 'failure'
         run: exit 1
 
       - run: |
