@@ -7,7 +7,7 @@ on:
 jobs:
   terraform:
     name: "Validate Terraform"
-    uses: .github/workflows/setup-workflow.yml@main
+    uses: jessewang/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
 #    runs-on: ubuntu-latest
 #    permissions:
 #      id-token: write
