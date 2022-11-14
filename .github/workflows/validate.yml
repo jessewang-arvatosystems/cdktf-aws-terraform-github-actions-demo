@@ -22,19 +22,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Navigate to main folder
-        run: cd main
-
       - uses: actions/setup-node@v3
         with:
           node-version: '14'
 
       - name: Install dependencies
-        run: npm install
+        run: | 
+          cd main
+          npm install
 
       - name: CDKTF Plan
         id: plan
         run: |
+          cd main
           echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
           cdktf plan >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
