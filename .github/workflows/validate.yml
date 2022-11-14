@@ -32,14 +32,20 @@ jobs:
           npm install
           npm install --global cdktf-cli@latest
 
-      - name: Terraform Plan
-        id: plan
+      - name: CDKTF Synth
+        id: synth
         run: |
           cd main
-          cdktf synth
-          cd cdktf.out
+          cdktf synth -o ../
+
+      - name: Terraform Init
+        run: |
+          cd stacks/main
           terraform init
-          terraform plan
+
+      - name: Terraform Plan
+        run: |
+          cd stacks/main
           echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
           terraform plan -no-color >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
