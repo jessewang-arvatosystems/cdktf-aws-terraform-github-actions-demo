@@ -23,16 +23,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Terraform Init
-        id: init
-        run: terraform init
+      - name: Navigate to main folder
+        id: cd-main
+        run: cd main
 
-      - name: Terraform Apply
-        id: apply
-        run: terraform apply --auto-approve
+      - name: Run npm install
+        id: npm-install
+        run: npm install
 
-      - name: Terraform Apply Status
-        if: steps.apply.outcome == 'failure'
+      - name: CDKTF Deploy
+        id: deploy
+        run: cdktf deploy --auto-approve
+
+      - name: CDKTF Deploy Status
+        if: steps.deploy.outcome == 'failure'
         run: exit 1
 
       - run: |

@@ -22,23 +22,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
+      - name: Navigate to main folder
+        id: cd-main
+        run: cd main
 
-      - name: Terraform Init
-        id: init
-        run: terraform init
+      - name: Run npm install
+        id: npm-install
+        run: npm install
 
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
-
-      - name: Terraform Plan
+      - name: CDKTF Plan
         id: plan
         run: |
           echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
-          terraform plan -no-color >> $GITHUB_ENV
+          cdktf plan >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Create comment
@@ -46,9 +42,6 @@ jobs:
         with:
           issue-number: ${{ github.event.pull_request.number }}
           body: |
-            #### Terraform Format and Style 🖌`${{ steps.fmt.outcome }}`
-            #### Terraform Initialization ⚙️`${{ steps.init.outcome }}`
-            #### Terraform Validation 🤖`${{ steps.validate.outcome }}`
             #### Terraform Plan 📖`${{ steps.plan.outcome }}`
 
             <details><summary>Show Plan</summary>
@@ -60,7 +53,7 @@ jobs:
             
             **Pull Request by: @${{ github.actor }}**
 
-      - name: Terraform Plan Status
+      - name: CDKTF Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1
 

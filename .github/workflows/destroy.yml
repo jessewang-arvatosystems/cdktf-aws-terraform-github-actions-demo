@@ -1,4 +1,4 @@
-# Only allow destroy to be triggered manually on main branch
+# Destroy can only be triggered manually on main branch
 on:
   workflow_dispatch:
 
@@ -20,16 +20,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Terraform Init
-        id: init
-        run: terraform init
+      - name: Navigate to main folder
+        id: cd-main
+        run: cd main
 
-      - name: Terraform Destroy
+      - name: Run npm install
+        id: npm-install
+        run: npm install
+
+      - name: CDKTF Deploy
         id: destroy
-        run: terraform destroy --auto-approve
+        run: cdktf destroy --auto-approve
 
-      - name: Terraform Destroy Status
-        if: steps.destroy.outcome == 'failure'
+      - name: CDKTF Destroy Status
+        if: steps.deploy.outcome == 'failure'
         run: exit 1
 
       - run: |
