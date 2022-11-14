@@ -9,7 +9,7 @@ describe("Verifying terraform configuration", () => {
   let expectObj : jest.JestMatchers<String>;
   beforeAll(() => {
     const app = Testing.app();
-    const stack = new CI_CD_PipelineStack(app, "core-stack-test");
+    const stack = new CI_CD_PipelineStack(app, "ci-cd-pipeline-stack-test");
 
     expectObj = expect(Testing.fullSynth(stack))
   });

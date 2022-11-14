@@ -17,7 +17,7 @@ describe("GitHub Role", () => {
     beforeAll(() => {
         expectObj = expect(
             Testing.synthScope((scope) => {
-                new GithubRoleConstruct(scope, "github-construct-test");
+                new GithubRoleConstruct(scope, "github-role-construct-test");
             })
         );
     });
