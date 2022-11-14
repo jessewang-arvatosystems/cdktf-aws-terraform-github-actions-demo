@@ -5,8 +5,10 @@
     "policyName": "cdktf-s3-policy",
     "terraformFolder": "terraform_backend/"
   },
-  "githubRole": {
-    "name": "github-oidc-role"
+  "iam": {
+    "githubRoleName": "github-oidc-role",
+    "additionalPermissionsPolicyName": "additional-permissions-role"
   },
+
   "region": "us-east-1"
 }

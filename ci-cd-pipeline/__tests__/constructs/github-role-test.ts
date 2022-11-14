@@ -5,9 +5,7 @@ import {IamRole} from "@cdktf/provider-aws/lib/iam-role";
 import {IamOpenidConnectProvider} from "@cdktf/provider-aws/lib/iam-openid-connect-provider";
 
 const {
-    githubRole: {
-        name
-    }
+    iam
 } = require("../../variables.json");
 const {OPEN_ID} = require("../../constants.json")
 
@@ -31,7 +29,7 @@ describe("GitHub Role", () => {
     });
 
     it("should exist", () => {
-        expectObj.toHaveResourceWithProperties(IamRole, {name});
+        expectObj.toHaveResourceWithProperties(IamRole, {name: iam.githubRoleName});
     });
 
 });

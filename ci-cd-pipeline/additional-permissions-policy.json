@@ -1,0 +1,27 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": [
+        "ec2:CreateSubnet",
+        "ec2:CreateTags",
+        "ec2:CreateVpc",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeTags",
+        "ec2:DescribeVpcs",
+        "ec2:DeleteSubnet",
+        "ec2:DeleteTags",
+        "ec2:DeleteVpc",
+        "ec2:DescribeVpcAttribute",
+        "ec2:DescribeVpcClassicLink",
+        "ec2:DescribeVpcClassicLinkDnsSupport",
+        "ec2:DisableVpcClassicLink",
+        "ec2:DisableVpcClassicLinkDnsSupport",
+        "ec2:EnableVpcClassicLink",
+        "ec2:EnableVpcClassicLinkDnsSupport"
+      ],
+      "Resource": "*",
+      "Effect": "Allow"
+    }
+  ]
+}
