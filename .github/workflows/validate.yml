@@ -7,13 +7,16 @@ on:
 jobs:
   terraform:
     name: "Validate Terraform"
-    uses: jessewang/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
+#    uses: jessewang/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
 #    runs-on: ubuntu-latest
 #    permissions:
 #      id-token: write
 #      contents: read
 #      pull-requests: write
     steps:
+      - name: Setup necessary libraries
+      - uses: jessewang/cdktf-aws-terraform-github-actions-demo/.github/workflows/setup-workflow.yml@main
+
 #      - name: Configure AWS credentials
 #        uses: aws-actions/configure-aws-credentials@v1
 #        with:
