@@ -37,14 +37,8 @@ jobs:
         run: |
           cd main
           echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
-          cdktf plan >> $GITHUB_ENV
+          cdktf plan --no-color >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
-
-#      - name: CDKTF Plan
-#        id: plan
-#        run: |
-#          cd main
-#          cdktf plan
 
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v2
