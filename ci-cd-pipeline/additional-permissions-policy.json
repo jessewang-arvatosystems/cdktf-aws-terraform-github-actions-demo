@@ -11,7 +11,10 @@
         "ec2:DescribeVpcs",
         "ec2:DeleteSubnet",
         "ec2:DeleteTags",
-        "ec2:DeleteVpc"
+        "ec2:DeleteVpc",
+        "ec2:DescribeVpcClassicLink",
+        "ec2:DisableVpcClassicLink",
+        "ec2:EnableVpcClassicLink"
       ],
       "Resource": "*",
       "Effect": "Allow"
