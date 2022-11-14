@@ -4,7 +4,7 @@ import "cdktf/lib/testing/adapters/jest";
 import {Testing} from "cdktf";
 import {CI_CD_PipelineStack} from "../main";
 
-describe("Verifying terraform configuration", () => {
+describe("Verifying ci-cd-pipeline configuration", () => {
 
   let expectObj : jest.JestMatchers<String>;
   beforeAll(() => {

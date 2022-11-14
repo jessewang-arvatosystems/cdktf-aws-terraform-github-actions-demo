@@ -4,12 +4,12 @@ import "cdktf/lib/testing/adapters/jest";
 import {Testing} from "cdktf";
 import {MainStack} from "../main";
 
-describe("Verifying terraform configuration", () => {
+describe("Verifying main terraform configuration", () => {
 
   let expectObj : jest.JestMatchers<String>;
   beforeAll(() => {
     const app = Testing.app();
-    const stack = new MainStack(app, "core-stack-test");
+    const stack = new MainStack(app, "main-stack-test");
 
     expectObj = expect(Testing.fullSynth(stack))
   });

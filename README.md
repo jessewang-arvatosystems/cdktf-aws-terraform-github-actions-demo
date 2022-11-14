@@ -20,5 +20,17 @@ Using CDKTF to provision an AWS environment using GitHub Actions.
 4. Check **Require status checks to pass before merging** and **Require branches to be up to date before merging**
    1. Add status check Validate Terraform form GitHub Actions. This option will not be available at first, until a PR has been submitted
 
+## Testing the pipeline
+1. In the terminal navigate to `main`
+2. Run `npm install`
+3. Run `cdktf deploy` and then approve the changes
+4. Note that it will deploy the `terraform.tfstate` file to the S3 bucket defined in the `ci-cd-pipeline` build
+5. Create a new branch
+6. Make a minor change in `main/variables.json`
+7. Commit and push the changes, then submit a PR
+8. The workflow should pass, merge the PR
+9. After merging the PR another workflow should execute which will enact the changes onto the AWS instance
+10. Log in to AWS and verify that the changes are implemented
+
 ## Testing Locally
-Run `npm test`
+Navigate to `ci-cd-pipeline` or `main` and  run `npm test`
