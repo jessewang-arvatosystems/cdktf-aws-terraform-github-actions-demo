@@ -13,8 +13,11 @@
         "ec2:DeleteTags",
         "ec2:DeleteVpc",
         "ec2:DescribeVpcClassicLink",
+        "ec2:DescribeVpcClassicLinkDnsSupport",
         "ec2:DisableVpcClassicLink",
-        "ec2:EnableVpcClassicLink"
+        "ec2:DisableVpcClassicLinkDnsSupport",
+        "ec2:EnableVpcClassicLink",
+        "ec2:EnableVpcClassicLinkDnsSupport"
       ],
       "Resource": "*",
       "Effect": "Allow"
