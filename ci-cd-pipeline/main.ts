@@ -6,6 +6,7 @@ import {AwsProvider} from "@cdktf/provider-aws/lib/provider";
 import {S3Construct} from "./constructs/s3";
 import {GithubRoleConstruct} from "./constructs/github-role";
 import {IamRolePolicyAttachment} from "@cdktf/provider-aws/lib/iam-role-policy-attachment";
+import {AdditionalPermissionsConstruct} from "./constructs/additional-permissions";
 
 const {
   region
@@ -17,14 +18,21 @@ export class CI_CD_PipelineStack extends TerraformStack {
 
     new AwsProvider(this, "AWS", {region});
 
-    const s3Construct = new S3Construct(this, "s3")
+    const s3Construct = new S3Construct(this, "s3");
+    const additionalPermissionsConstruct = new AdditionalPermissionsConstruct(this, "additional-permissions");
 
-    const githubRoleConstruct = new GithubRoleConstruct(this, "github-role")
+    const githubRoleConstruct = new GithubRoleConstruct(this, "github-role");
 
     // Enable Github Role to access to S3 Bucket
     new IamRolePolicyAttachment(this, "attach-policy", {
       policyArn: s3Construct.iamPolicy.arn,
-      role: githubRoleConstruct.iamRole.name
+      role: githubRoleConstruct.iamRole.name,
+    });
+
+    // Enable Github Role to access to other resources on a required basis
+    new IamRolePolicyAttachment(this, "attach-additional-policies", {
+      policyArn: additionalPermissionsConstruct.iamPolicy.arn,
+      role: githubRoleConstruct.iamRole.name,
     });
   }
 }
