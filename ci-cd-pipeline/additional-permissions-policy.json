@@ -12,6 +12,7 @@
         "ec2:DeleteSubnet",
         "ec2:DeleteTags",
         "ec2:DeleteVpc",
+        "ec2:DescribeVpcAttribute",
         "ec2:DescribeVpcClassicLink",
         "ec2:DescribeVpcClassicLinkDnsSupport",
         "ec2:DisableVpcClassicLink",
