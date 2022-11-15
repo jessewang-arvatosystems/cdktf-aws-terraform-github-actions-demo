@@ -30,55 +30,48 @@ jobs:
           npm install
 
       - name: Local Test
-        id: local-test
+        id: localTest
         run: |
           cd main
           npm test
-          
-      - name: Test the synth
-        uses: hashicorp/terraform-cdk-action@v0.1.0
-        with:
-          stackName: main
-          mode: synth-only
 
-#      - name: CDKTF Synth
-#        id: synth
-#        run: |
-#          cd main
-#          cdktf synth -o ../
-#
-#      - name: Terraform Init
-#        run: |
-#          cd stacks/main
-#          terraform init
-#
-#      - name: Terraform Plan
-#        id: plan
-#        run: |
-#          cd stacks/main
-#          echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
-#          terraform plan -no-color >> $GITHUB_ENV
-#          echo 'EOF' >> $GITHUB_ENV
-#
-#      - name: Create comment
-#        uses: peter-evans/create-or-update-comment@v2
-#        with:
-#          issue-number: ${{ github.event.pull_request.number }}
-#          body: |
-#            #### Terraform Plan 📖`${{ steps.plan.outcome }}`
-#
-#            <details><summary>Show Plan</summary>
-#
-#            ```${{ env.PLAN_OUTPUT }}
-#            ```
-#
-#            </details>
-#
-#            **Pull Request by: @${{ github.actor }}**
-#
-#      - name: CDKTF Plan Status
-#        if: steps.plan.outcome == 'failure' || steps.local-test.outcome == 'failure'
-#        run: exit 1
+      - name: CDKTF Synth
+        run: |
+          cd main
+          cdktf synth -o ../
+
+      - name: Terraform Init
+        run: |
+          cd stacks/main
+          terraform init
+
+      - name: Terraform Plan
+        id: plan
+        run: |
+          cd stacks/main
+          echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
+          terraform plan -no-color >> $GITHUB_ENV
+          echo 'EOF' >> $GITHUB_ENV
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            #### Terraform Plan 📖`${{ steps.plan.outcome }}`
+
+            <details><summary>Show Plan</summary>
+
+            ```${{ env.PLAN_OUTPUT }}
+            ```
+
+            </details>
+
+            **Pull Request by: @${{ github.actor }}**
+
+      - name: CDKTF Plan Status
+        if: steps.plan.outcome == 'failure' || steps.localTest.outcome == 'failure'
+        run: exit 1
 
       - run: |
           echo The Terraform build has been successfully validated
