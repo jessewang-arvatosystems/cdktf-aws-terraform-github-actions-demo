@@ -29,11 +29,6 @@ jobs:
           cd main
           npm install
 
-      - name: Generate module and provider bindings
-        run: |
-          cd main
-          npx --yes cdktf-cli get
-
       - name: Local Test
         id: local-test
         run: |
@@ -44,7 +39,7 @@ jobs:
         uses: hashicorp/terraform-cdk-action@v0.1.0
         with:
           stackName: main
-          mode: plan-only
+          mode: synth-only
 
 #      - name: CDKTF Synth
 #        id: synth
