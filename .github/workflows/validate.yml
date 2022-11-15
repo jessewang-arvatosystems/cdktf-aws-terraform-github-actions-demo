@@ -32,6 +32,12 @@ jobs:
           npm install
           npm install --global cdktf-cli@latest
 
+      - name: Local Test
+        id: local-test
+        run: |
+          cd main
+          npm test
+
       - name: CDKTF Synth
         id: synth
         run: |
@@ -68,7 +74,7 @@ jobs:
             **Pull Request by: @${{ github.actor }}**
 
       - name: CDKTF Plan Status
-        if: steps.plan.outcome == 'failure'
+        if: steps.plan.outcome == 'failure' || steps.local-test.outcome == 'failure'
         run: exit 1
 
       - run: |
