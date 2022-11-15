@@ -3,13 +3,13 @@
     "cidrBlock": "10.0.0.0/16",
     "instanceTenancy": "default",
     "tags": {
-      "Creator":"vpc cdktf example3"
+      "Creator":"vpc cdktf example"
     }
   },
   "subnet": {
     "cidrBlock": "10.0.1.0/24",
     "tags": {
-      "Creator":"subnet cdktf example3"
+      "Creator":"subnet cdktf example"
     }
   },
   "region": "us-east-1"
