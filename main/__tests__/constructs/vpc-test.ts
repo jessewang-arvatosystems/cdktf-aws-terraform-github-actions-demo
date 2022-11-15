@@ -25,6 +25,7 @@ describe("VPC", () => {
             "cidr_block": vpc.cidrBlock,
             "instance_tenancy": vpc.instanceTenancy,
             "tags": {
+                "Name": vpc.tags.Name,
                 "Creator": vpc.tags.Creator
             }
         });
@@ -34,6 +35,7 @@ describe("VPC", () => {
         expectObj.toHaveResourceWithProperties(Subnet, {
             "cidr_block": subnet.cidrBlock,
             "tags": {
+                "Name": subnet.tags.Name,
                 "Creator": subnet.tags.Creator
             }
         });
