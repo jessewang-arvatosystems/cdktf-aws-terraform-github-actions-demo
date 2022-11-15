@@ -16,6 +16,7 @@ export class VPCConstruct extends Construct {
             cidrBlock: vpc.cidrBlock,
             instanceTenancy: vpc.instanceTenancy,
             tags: {
+                Name: vpc.tags.Name,
                 Creator: vpc.tags.Creator
             }
         });
@@ -24,6 +25,7 @@ export class VPCConstruct extends Construct {
             vpcId: exampleVpc.id,
             cidrBlock: subnet.cidrBlock,
             tags: {
+                Name: subnet.tags.Name,
                 Creator: subnet.tags.Creator
             }
         });
