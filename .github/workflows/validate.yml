@@ -55,11 +55,11 @@ jobs:
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Create comment
-        uses: actions/github-script@v6
+        uses: peter-evans/create-or-update-comment@v2
         with:
           issue-number: ${{ github.event.pull_request.number }}
-          script: |
-            const output = `#### Terraform Plan 📖`${{ steps.plan.outcome }}`
+          body: |
+            #### Terraform Plan 📖`${{ steps.plan.outcome }}`
 
             <details><summary>Show Plan</summary>
 
@@ -68,14 +68,7 @@ jobs:
 
             </details>
 
-            **Pull Request by: @${{ github.actor }}**`;
-            
-            github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: output
-            })
+            **Pull Request by: @${{ github.actor }}**
 
       - name: CDKTF Plan Status
         if: steps.plan.outcome == 'failure' || steps.localTest.outcome == 'failure'
