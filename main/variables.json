@@ -3,14 +3,14 @@
     "cidrBlock": "10.0.0.0/16",
     "instanceTenancy": "default",
     "tags": {
-      "Name": "vpc cdktf example",
+      "Name": "vpc cdktf example 2",
       "Creator":"vpc cdktf example"
     }
   },
   "subnet": {
     "cidrBlock": "10.0.1.0/24",
     "tags": {
-      "Name": "subnet cdktf example",
+      "Name": "subnet cdktf example 2",
       "Creator":"subnet cdktf example"
     }
   },
