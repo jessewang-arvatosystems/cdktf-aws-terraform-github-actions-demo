@@ -30,7 +30,7 @@ jobs:
           npm install
 
       - name: Generate module and provider bindings
-        run: npx cdktf-cli get
+        run: npx --yes cdktf-cli get
 
       - name: Local Test
         id: local-test
