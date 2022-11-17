@@ -52,10 +52,3 @@ jobs:
         run: |
           cd stacks/main
           terraform show
-
-      - name: Upload Documentation to Wiki
-        uses: SwiftDocOrg/github-wiki-publish-action@v1
-        with:
-          path: "graph"
-        env:
-          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
