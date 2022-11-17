@@ -1,18 +1,15 @@
-# Runs when a PR is merged or triggered manually on main branch
+# Provide the current state of Terraform built infrastructure
 on:
-  pull_request:
-    types:
-      - closed
   workflow_dispatch:
 
 jobs:
   terraform:
-    name: "Apply Terraform"
-    if: github.event.pull_request.merged == true || github.ref == 'refs/heads/main'
+    name: "Terraform State"
     runs-on: ubuntu-latest
     permissions:
       id-token: write
       contents: read
+      pull-requests: write
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
@@ -35,12 +32,22 @@ jobs:
           npm install
           npm install --global cdktf-cli
 
-      - name: CDKTF Deploy
-        id: deploy
+      - name: CDKTF Synth
         run: |
           cd main
-          cdktf deploy --auto-approve
+          cdktf synth -o ../
 
-      - name: CDKTF Deploy Status
-        if: steps.deploy.outcome == 'failure'
-        run: exit 1
+      - name: Terraform Init
+        run: |
+          cd stacks/main
+          terraform init
+
+      - name: Terraform State List
+        run: |
+          cd stacks/main
+          terraform state list
+
+      - name: Terraform Show
+        run: |
+          cd stacks/main
+          terraform show

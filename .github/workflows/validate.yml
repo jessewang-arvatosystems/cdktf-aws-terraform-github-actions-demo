@@ -77,6 +77,3 @@ jobs:
       - name: CDKTF Plan Status
         if: steps.plan.outcome == 'failure' || steps.localTest.outcome == 'failure'
         run: exit 1
-
-      - run: |
-          echo The Terraform build has been successfully validated
