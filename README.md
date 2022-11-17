@@ -41,6 +41,9 @@ Using CDKTF to provision an AWS environment using GitHub Actions.
 Should seldom be used. The stack created in `main` can be created/destroyed by navigating to the **Actions** tab and
 triggering the workflows **.github/workflows/apply.yml** or **.github/workflows/destroy.yml** manually
 
+## Getting state of Terraform created infrastructure
+The stack can be analyzed by navigating to the **Actions** tab and triggering the workflow **.github/workflows/state.yml**
+
 ## Testing Locally
 Navigate to `ci-cd-pipeline` or `main` and  run `npm test`
 
