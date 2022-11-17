@@ -2,9 +2,9 @@
 Using CDKTF to provision an AWS environment using GitHub Actions.
 
 ## Requirements
-AWS CLI + authenticated to an AWS account with write permissions
-Node Version >= 14
-CDKTF-CLI installed: `npm install --global cdktf-cli@latest`
+- AWS CLI + authenticated to an AWS account with write permissions
+- Node Version >= 14
+- CDKTF-CLI installed: `npm install --global cdktf-cli@latest`
 
 ## CI-CD Setup
 1. In the terminal navigate to `ci-cd-pipeline`
@@ -43,3 +43,7 @@ triggering the workflows **.github/workflows/apply.yml** or **.github/workflows/
 
 ## Testing Locally
 Navigate to `ci-cd-pipeline` or `main` and  run `npm test`
+
+## Common issues
+- CDKTF deploy on the ci-ci-pipeline directory is not working
+This may happen if you ran CDKTF deploy using with different AWS credentials. Remove all .tfstate and .tfstate.backup files 
