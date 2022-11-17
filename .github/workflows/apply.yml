@@ -29,7 +29,7 @@ jobs:
         run: |
           cd main
           npm install
-          npm install --global cdktf-cli@latest
+          npm install --global cdktf-cli
 
       - name: CDKTF Deploy
         id: deploy
