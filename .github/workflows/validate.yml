@@ -36,22 +36,22 @@ jobs:
           cd main
           npm test
 
-      - name: CDKTF Synth
-        run: |
-          cd main
-          cdktf synth -o ../
-
-      - name: Terraform Init
-        run: |
-          cd stacks/main
-          terraform init
+#      - name: CDKTF Synth
+#        run: |
+#          cd main
+#          cdktf synth -o ../
+#
+#      - name: Terraform Init
+#        run: |
+#          cd stacks/main
+#          terraform init
 
       - name: Terraform Plan
         id: plan
         run: |
           cd stacks/main
           echo 'PLAN_OUTPUT<<EOF' >> $GITHUB_ENV
-          terraform plan -no-color >> $GITHUB_ENV
+          cdktf diff --no-color >> $GITHUB_ENV
           echo 'EOF' >> $GITHUB_ENV
 
       - name: Create comment
