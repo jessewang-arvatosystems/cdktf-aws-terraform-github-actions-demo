@@ -1,6 +1,8 @@
 # Provide the current state of Terraform built infrastructure
 on:
   workflow_dispatch:
+    branches:
+      - 'main'
 
 jobs:
   terraform:
