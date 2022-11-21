@@ -49,12 +49,16 @@ jobs:
         run: |
           cd stacks/main
           terraform graph | dot -Tsvg > ../../../../graph.svg
-          cd ../../
+
+      - name: Debug
+        run: |
+          pwd
+          ls
 
       - name: Commit and Push graph.svg
         uses: EndBug/add-and-commit@v9
         with:
-          add: graph.svg
+          add: ../../../../graph.svg
           default_author: github_actions
           push: true
 
@@ -86,6 +90,6 @@ jobs:
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
         with:
-          path: "Current-Architecture"
+          path: "Current Architecture"
         env:
           GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
