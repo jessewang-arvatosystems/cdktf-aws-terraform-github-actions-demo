@@ -42,27 +42,45 @@ jobs:
           cd stacks/main
           terraform init
 
+      - name: Setup Graphviz
+        uses: ts-graphviz/setup-graphviz@v1
+
+      - name: Graph Architecture
+        run: |
+          cd stacks/main
+          terraform graph | dot -Tsvg > ../../../../graph.svg
+
+      - name: Commit and Push graph.svg
+        uses: EndBug/add-and-commit@v9
+        with:
+          add: graph.svg
+          default_author: github_actions
+          push: true
+
       - name: Initialize Wiki folder
         run: |
-          mkdir Current-Architecture
-          echo \`\`\` >> Current-Architecture/state.md
+          mkdir state
+          echo "![graph](https://github.com/jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/blob/main/graph.svg)" >> state/Current\ Architecture.md
+          echo "Terraform Resource List:" >> state/Current\ Architecture.md
+          echo \`\`\` >> state/Current\ Architecture.md
 
       - name: Terraform State List
         run: |
           cd stacks/main
-          terraform state list >> ../../Current-Architecture/state.md
+          terraform state list >> ../../state/Current\ Architecture.md
 
       - run: |
-          echo \`\`\` >> Current-Architecture/state.md
-          echo \`\`\` >> Current-Architecture/state.md
+          echo \`\`\` >> state/Current\ Architecture.md
+          echo "Terraform Resources:" >> state/Current\ Architecture.md
+          echo \`\`\` >> state/Current\ Architecture.md
 
       - name: Terraform Show
         run: |
           cd stacks/main
-          terraform show >> ../../Current-Architecture/state.md
+          terraform show -no-color >> ../../state/Current\ Architecture.md
 
       - run: |
-          echo \`\`\` >> Current-Architecture/state.md
+          echo \`\`\` >> state/Current\ Architecture.md
 
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
