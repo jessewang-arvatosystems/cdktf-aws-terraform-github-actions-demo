@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
-      contents: write
+      contents: read
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
@@ -44,24 +44,9 @@ jobs:
           cd main/cdktf.out/stacks/main
           terraform init
 
-      - name: Setup Graphviz
-        uses: ts-graphviz/setup-graphviz@v1
-
-      - name: Graph Architecture
-        run: |
-          cd main/cdktf.out/stacks/main
-          terraform graph | dot -Tsvg > ../../../../graph.svg
-
-      - name: Commit and Push graph.svg
-        uses: EndBug/add-and-commit@v9
-        with:
-          add: graph.svg
-
       - name: Initialize Wiki folder
         run: |
           mkdir state
-          echo "## Terraform Graph" >> state/Current-Architecture.md
-          echo "![graph](https://github.com/jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/blob/main/graph.svg)" >> state/Current-Architecture.md
           echo "## Terraform Resource List" >> state/Current-Architecture.md
           echo \`\`\` >> state/Current-Architecture.md
 
