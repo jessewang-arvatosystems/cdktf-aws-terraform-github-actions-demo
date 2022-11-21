@@ -42,12 +42,31 @@ jobs:
           cd stacks/main
           terraform init
 
+      - name: Initialize Wiki folder
+        run: |
+          mkdir Current-Architecture
+          echo \`\`\` >> Current-Architecture/state.md
+
       - name: Terraform State List
         run: |
           cd stacks/main
-          terraform state list
+          terraform state list >> ../../Current-Architecture/state.md
+
+      - run: |
+          echo \`\`\` >> Current-Architecture/state.md
+          echo \`\`\` >> Current-Architecture/state.md
 
       - name: Terraform Show
         run: |
           cd stacks/main
-          terraform show
+          terraform show >> ../../Current-Architecture/state.md
+
+      - run: |
+          echo \`\`\` >> Current-Architecture/state.md
+
+      - name: Upload Documentation to Wiki
+        uses: SwiftDocOrg/github-wiki-publish-action@v1
+        with:
+          path: "Current-Architecture"
+        env:
+          GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
