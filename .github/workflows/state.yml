@@ -12,7 +12,11 @@ jobs:
     permissions:
       id-token: write
       contents: write
-      actions: write
+      deployments: write
+      pull-requests: write
+      repository-projects: write
+      security-events: write
+      statuses: write
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1-node16
