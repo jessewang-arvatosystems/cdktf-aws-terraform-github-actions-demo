@@ -55,33 +55,32 @@ jobs:
         with:
           add: graph.svg
           default_author: github_actions
-          push: true
           tag_push: '--force'
 
       - name: Initialize Wiki folder
         run: |
           mkdir state
-          echo "![graph](https://github.com/jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/blob/main/graph.svg)" >> state/Current\ Architecture.md
-          echo "Terraform Resource List:" >> state/Current\ Architecture.md
-          echo \`\`\` >> state/Current\ Architecture.md
+          echo "![graph](https://github.com/jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/blob/main/graph.svg)" >> state/Current-Architecture.md
+          echo "Terraform Resource List:" >> state/Current-Architecture.md
+          echo \`\`\` >> state/Current-Architecture.md
 
       - name: Terraform State List
         run: |
           cd main/cdktf.out/stacks/main
-          terraform state list >> ../../../../state/Current\ Architecture.md
+          terraform state list >> ../../../../state/Current-Architecture.md
 
       - run: |
-          echo \`\`\` >> state/Current\ Architecture.md
-          echo "Terraform Resources:" >> state/Current\ Architecture.md
-          echo \`\`\` >> state/Current\ Architecture.md
+          echo \`\`\` >> state/Current-Architecture.md
+          echo "Terraform Resources:" >> state/Current-Architecture.md
+          echo \`\`\` >> state/Current-Architecture.md
 
       - name: Terraform Show
         run: |
           cd main/cdktf.out/stacks/main
-          terraform show -no-color >> ../../../../state/Current\ Architecture.md
+          terraform show -no-color >> ../../../../state/Current-Architecture.md
 
       - run: |
-          echo \`\`\` >> state/Current\ Architecture.md
+          echo \`\`\` >> state/Current-Architecture.md
 
       - name: Upload Documentation to Wiki
         uses: SwiftDocOrg/github-wiki-publish-action@v1
