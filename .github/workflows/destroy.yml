@@ -1,4 +1,6 @@
 # Destroy can only be triggered manually on main branch
+name: Destroy Resources
+
 on:
   workflow_dispatch:
 

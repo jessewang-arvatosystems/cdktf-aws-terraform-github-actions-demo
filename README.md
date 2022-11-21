@@ -39,10 +39,11 @@ Using CDKTF to provision an AWS environment using GitHub Actions.
 
 ## Manually creating/destroying the infrastructure
 Should seldom be used. The stack created in `main` can be created/destroyed by navigating to the **Actions** tab and
-triggering the workflows **.github/workflows/apply.yml** or **.github/workflows/destroy.yml** manually
+triggering the **Apply Resources** or **Destroy Resources** manually
 
 ## Getting state of Terraform created infrastructure
-The stack can be analyzed by navigating to the **Actions** tab and triggering the workflow **.github/workflows/state.yml**
+The stack can be analyzed by navigating to the **Actions** tab and triggering the **State Resources** workflow
+A wiki page will be generated listing the current Terraform infrastructure: [Current Architecture](https://github.com/jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/wiki/Current-Architecture) 
 
 ## Testing Locally
 Navigate to `ci-cd-pipeline` or `main` and  run `npm test`

@@ -1,4 +1,6 @@
 # Runs when a PR is merged or triggered manually on main branch
+name: Apply Resources
+
 on:
   pull_request:
     types:

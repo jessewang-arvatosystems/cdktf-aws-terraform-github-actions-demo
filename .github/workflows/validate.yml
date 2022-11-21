@@ -1,4 +1,6 @@
 # Runs on an open PR or open PR code update
+name: Validate Resources
+
 on:
   pull_request:
     branches:

@@ -1,4 +1,6 @@
 # Provide the current state of Terraform built infrastructure
+name: State Resources
+
 on:
   workflow_dispatch:
 
@@ -60,8 +62,9 @@ jobs:
       - name: Initialize Wiki folder
         run: |
           mkdir state
+          echo "## Terraform Graph" >> state/Current-Architecture.md
           echo "![graph](https://github.com/jessewang-arvatosystems/cdktf-aws-terraform-github-actions-demo/blob/main/graph.svg)" >> state/Current-Architecture.md
-          echo "Terraform Resource List:" >> state/Current-Architecture.md
+          echo "## Terraform Resource List" >> state/Current-Architecture.md
           echo \`\`\` >> state/Current-Architecture.md
 
       - name: Terraform State List
@@ -71,7 +74,7 @@ jobs:
 
       - run: |
           echo \`\`\` >> state/Current-Architecture.md
-          echo "Terraform Resources:" >> state/Current-Architecture.md
+          echo "## Terraform Resources" >> state/Current-Architecture.md
           echo \`\`\` >> state/Current-Architecture.md
 
       - name: Terraform Show
